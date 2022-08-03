@@ -7,7 +7,7 @@
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
       <link rel="stylesheet" type="text/css" href="win95.css">
-      <title>Hello, world!</title>
+      <title>Atogan Predictor</title>
    </head>
    <body>
       <div class="container mt-4">
@@ -19,7 +19,7 @@
                <form id="sform">
                   <div class="form-group">
                      <label for="exampleFormControlTextarea1">Text:</label>
-                     <textarea class="form-95" id="exampleFormControlTextarea1" rows="3"></textarea>
+                     <textarea class="form-95" id="exampleFormControlTextarea1" rows="4"></textarea>
                   </div>
                   <div class="form-group row">
                      <div class="col text-center">
@@ -31,10 +31,16 @@
             </div>
          </div>
       </div>
-      <!-- <div class="text-center mb-4">
-         <img width="100" src="https://upload.wikimedia.org/wikipedia/commons/0/0f/4chan_Logo.png" >
-      </div> -->
+      
+      <div class="text-center mb-4 text-error">
+        <b>Predicts which atogan would be most likely to post the specified text.<br/> Longer text should be more accurate <br/></b> 
+        <i style="position: fixed;bottom:0px;transform: translate(-50%);z-index: -1;">Developed by Logit !pve5sxHdv6</i>
+        <!-- <img width="100" src="https://upload.wikimedia.org/wikipedia/commons/0/0f/4chan_Logo.png" > -->
+      </div>
       <script>
+        /*
+         If you are reading this fuck you. This entire site was made in like 10 minutes. of course it ended up like this.
+        */
         var locked = false;
         document.getElementById("sform").addEventListener("submit", function(e){
             e.preventDefault();
@@ -44,11 +50,8 @@
             if(locked||text=='') return;
             locked = true;
 
-
-
             document.getElementById("results").innerHTML = '•';
 
-            
             
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "https://logit2718.pythonanywhere.com/predict", true);
@@ -56,7 +59,7 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     setTimeout(function(){
-                        document.getElementById("results").innerHTML = 'Predicted Poster: '+JSON.parse(xhr.responseText).poster+' <br><br><i>Posters Currently Included in Model: Agirl,Sean,Croc,Exhibanon,SweetNLow,C.B.,Kat</i>';
+                        document.getElementById("results").innerHTML = 'Predicted Poster: <b>'+JSON.parse(xhr.responseText).poster+'</b> <br><br><i>Posters Currently Included in Model: Agirl (who will break the rules), Sean, Croc, Exhibanon, SweetNLow, C.B., Kat</i>';
                         locked = false;
                     },200*Math.log(text.length));
                     
