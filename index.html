@@ -60,7 +60,7 @@
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     setTimeout(function(){
                         parsed = JSON.parse(xhr.responseText)
-                        // resultsstr = 'Predicted Poster: <b>'+ parsed.poster +'</b> <br>'
+                        resultsstr = '';//'Predicted Poster: <b>'+ parsed.poster +'</b> <br>'
                         resultsstr += 'Most Likely:'
                         for(var i=0;i<parsed.probs.length;i++){
                            var pp = parsed.probs[i];
