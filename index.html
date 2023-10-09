@@ -67,7 +67,7 @@
                         if(parsed.textfeatures.length > 100){
                            quality = 'Est. Accuracy: <i style="color:green">high</i>'
                         }
-                        resultsstr = '<br>';//'Predicted Poster: <b>'+ parsed.poster +'</b> <br>'
+                        resultsstr = '';//'Predicted Poster: <b>'+ parsed.poster +'</b> <br>'
                         resultsstr += 'Most Likely:'
                         for(var i=0;i<parsed.probs.length;i++){
                            var pp = parsed.probs[i];
@@ -85,6 +85,8 @@
                              
                            `
                         }
+                       resultsstr += '<br>'
+                       resultsstr += quality
 
                           document.getElementById("results").innerHTML = resultsstr
                         //document.getElementById("results").innerHTML = 'Predicted Poster: <b>'+JSON.parse(xhr.responseText).poster+'</b> <br><br><i>Posters Currently Included in Model: Agirl (who will break the rules), Sean, Croc, Exhibanon, SweetNLow, C.B., Kat</i>';
