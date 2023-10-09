@@ -61,18 +61,20 @@
                     setTimeout(function(){
                         parsed = JSON.parse(xhr.responseText)
                         resultsstr = 'Predicted Poster: <b>'+ parsed.poster +'</b> <br>'
-                        resultsstr += 'Most Likely: '
+                        resultsstr += 'Most Likely:'
                         for(var i=0;i<parsed.probs.length;i++){
                            var pp = parsed.probs[i];
                            var pctg = (pp.probability*100).toFixed(2)
                            
                            resultsstr += `
                               <b>${pp.prediction}</b>
-                           <div class="progress">
-                             <div class="progress-bar" role="progressbar" style="width: ${pctg}%" aria-valuenow="${pctg}" aria-valuemin="0" aria-valuemax="100"></div>
-                             ${(pp.probability>0.5)&&pctg}
+                              <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: ${pctg}%" aria-valuenow="${pctg}" aria-valuemin="0" aria-valuemax="100">
+                                   ${(pp.probability>0.5)&&pctg}
+                                </div>
+                                   ${(pp.probability<0.5)&&pctg}
                              </div>
-                             ${(pp.probability<0.5)&&pctg}
+                             
                            `
                         }
 
