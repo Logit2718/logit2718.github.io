@@ -59,7 +59,25 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     setTimeout(function(){
-                        document.getElementById("results").innerHTML = 'Predicted Poster: <b>'+JSON.parse(xhr.responseText).poster+'</b> <br><br><i>Posters Currently Included in Model: Agirl (who will break the rules), Sean, Croc, Exhibanon, SweetNLow, C.B., Kat</i>';
+                        parsed = JSON.parse(xhr.responseText)
+                        resultsstr = 'Predicted Poster: <b>'+ parsed.poster +'</b> <br>'
+                        resultsstr += 'Most Likely: '
+                        for(var i=0;i<parsed.probs.length;i++){
+                           var pp = parsed.probs[i];
+                           var pctg = (pp.probability*100).toFixed(2)
+                           
+                           resultsstr += `
+                              <b>${pp.prediction}</b>
+                           <div class="progress">
+                             <div class="progress-bar" role="progressbar" style="width: ${pctg}%" aria-valuenow="${pctg}" aria-valuemin="0" aria-valuemax="100"></div>
+                             ${(pp.probability>0.5)&&pctg}
+                             </div>
+                             ${(pp.probability<0.5)&&pctg}
+                           `
+                        }
+
+                          document.getElementById("results").innerHTML = resultsstr
+                        //document.getElementById("results").innerHTML = 'Predicted Poster: <b>'+JSON.parse(xhr.responseText).poster+'</b> <br><br><i>Posters Currently Included in Model: Agirl (who will break the rules), Sean, Croc, Exhibanon, SweetNLow, C.B., Kat</i>';
                         locked = false;
                     },200*Math.log(text.length));
                     
