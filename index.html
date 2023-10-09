@@ -70,9 +70,9 @@
                               <b>${pp.prediction}</b>
                               <div class="progress">
                                 <div class="progress-bar" role="progressbar" style="width: ${pctg}%" aria-valuenow="${pctg}" aria-valuemin="0" aria-valuemax="100">
-                                   ${(pp.probability>0.5)&&pctg}
+                                   ${(pp.probability>0.5)?(pctg+'%'):''}
                                 </div>
-                                   ${(pp.probability<0.5)&&pctg}
+                                   ${(pp.probability<0.5)?(pctg+'%'):''}
                              </div>
                              
                            `
